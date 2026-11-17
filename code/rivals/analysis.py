@@ -85,6 +85,7 @@ def price_position(ours: float, low: float, average: float, high: float) -> str:
         return ABOVE_AVERAGE
     return AT_AVERAGE
 
+
 def compare_prices(prices: pd.DataFrame) -> pd.DataFrame:
     """Our price next to every rival's, for every item and size we both sell.
 
@@ -123,7 +124,9 @@ def compare_prices(prices: pd.DataFrame) -> pd.DataFrame:
         for ours, lo, avg, hi in zip(table["our_price"], low, table["rival_avg"], high)
     ]
 
-    columns = ["canonical", "size", "our_price", *rival_cols, "rival_avg", "our_position"]
+    columns = [
+        "canonical", "size", "our_price", *rival_cols, "rival_avg", "our_position"
+    ]
     return table[columns].reset_index(drop=True)
 
 
@@ -169,4 +172,5 @@ def gap_analysis(menus: pd.DataFrame) -> pd.DataFrame:
         ["where_order", "rivals", "canonical"], ascending=[True, False, True]
     )
 
-    return gaps[["canonical", "kind", "where", "rivals", "sold_by"]].reset_index(drop=True)
+    columns = ["canonical", "kind", "where", "rivals", "sold_by"]
+    return gaps[columns].reset_index(drop=True)

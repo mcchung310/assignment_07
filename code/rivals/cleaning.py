@@ -64,6 +64,7 @@ def clean_card_lines(text: str) -> list[str]:
         lines.append(line)
     return lines
 
+
 def parse_price_line(line: str) -> list[tuple[str, float]]:
     """Every (size, price) pair on a price line.
 

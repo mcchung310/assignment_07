@@ -201,7 +201,9 @@ def match_items(menus: pd.DataFrame, decisions: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(
         rows,
-        columns=["cafe", "item", "kind", "status", "matched_to", "score", "suggestions"],
+        columns=[
+            "cafe", "item", "kind", "status", "matched_to", "score", "suggestions"
+        ],
     )
 
 
@@ -229,4 +231,3 @@ def record_decision(decisions: pd.DataFrame, cafe: str, item: str,
     if kept.empty:
         return new
     return pd.concat([kept, new]).reset_index(drop=True)
-
