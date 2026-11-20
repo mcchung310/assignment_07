@@ -8,29 +8,32 @@ threshold, human in the loop, merge indicator, gap analysis), and make it
 actionable.
 
 
-What I learned from this assignment were skills that I will definitely being using
-going forwards for my end of semester project. I learned is that scraping starts 
-with figuring out where the data actually lives. Lakeshore had it in the HTML, 
-so a class selector on each h2 plus the sibling selector ~ div.menu-grid connected 
+What I learned from this assignment were skills that I will definitely be using 
+going forward for my end-of-semester project. I learned that scraping starts with 
+figuring out where the data actually lives. Lakeshore had it in the HTML, so a 
+class selector on each h2 plus the sibling selector ~ div.menu-grid connected 
 every category to its cards, and inner_text gave me the raw card text to clean. 
 Hilltop had real tables, so read_html and melt turned the S/M/L columns into one 
 row per size. Canal was the hardest because the menu isn't in the HTML at all. 
 I needed a headless browser to click through it, handle pagination with 
 "Show more," keep waiting for JavaScript after every click, and crawl each item 
 page using its href attribute. Skipping a wait doesn't throw an error, it just 
-quietly gives you fewer rows. Matching taught me that fuzzy matching compares 
-spelling, not meaning. Normalization helps, but "Matcha Latte" still scores 
-87 against "Mocha Latte" and is a different drink, while "PSL" scores near 
-0 and is the same as our Pumpkin Spice Latte. That's why the threshold sends 
-anything under 90 to a human in the loop. Then an outer merge with the merge 
-indicator did most of the gap analysis, showing 25 prices below the market, 
-10 above, and 8 items only the rivals sell.
+quietly gives you fewer rows.
+
+Matching taught me that fuzzy matching compares spelling, not meaning. 
+Normalization helps, but "Matcha Latte" still scores 87 against "Mocha Latte" 
+and is a different drink, while "PSL" scores near 0 and is the same as our 
+Pumpkin Spice Latte. That's why the threshold sends anything under 90 to 
+a human in the loop. Then an outer merge with the merge indicator did most 
+of the gap analysis, showing 25 prices below the market, 10 above, and 8 
+items only the rivals sell.
 
 The most challenging part was doing match_items because it was so long and 
-had so many moving parts to it. Also the order of checks mattered and the list 
-of names grew while the loop ran so one decision could change later matches without 
-I also got some matches wrong the first time so I had to redo it. Next time
-I'll inspect each page in DevTools before writing selectors, run pytest -k after every 
-function instead of at the end, judge matches by asking "would a customer get the same thing?" 
-instead of trusting the score, and always start the app from menu_app.py and run ruff 
-check before pushing.
+had so many moving parts. I found that the order of checks mattered, and 
+that adding names to the list while the loop was running could affect later 
+matches. I also got some matches wrong the first time around, so I had to go 
+back and fix them. Next time (like for my project) I'll inspect each page in
+DevTools before writing selectors, run tests after every function instead 
+of at the end, judge matches by asking "would a customer get the same thing?" 
+instead of trusting the score, and always start the app from menu_app.py and 
+run ruff check before pushing.
